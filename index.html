@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Skeleton</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+  
+
+        const ARRAY = ["papir", "saks", "sten"];
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function computerSelection() {
+            return Math.floor(Math.random() * ARRAY.length);
+        }
+
+        function playerSelection(choice) {
+            return ARRAY.indexOf(choice);            
+        }
+
+        function playRound(playerSelection, computerSelection, playerName){
+            if(playerSelection === 0 && computerSelection === 2) {
+                playerScore++;
+                return `${playerName} vinder, papir slår sten!!`;
+            } else if (computerSelection === 0 && playerSelection === 2){
+                computerScore++;
+                return `${playerName} taber, papir slår sten!!`;
+            } else {
+                if (computerSelection === playerSelection) {
+                    return `I har det samme!! - Prøv igen.`;
+                } else if (computerSelection < playerSelection){
+                    playerScore++;
+                    return `${playerName} vinder, ${ARRAY[playerSelection]} slår ${ARRAY[computerSelection]}!!`;
+                } else {
+                    computerScore++;
+                    return `${playerName} taber, ${ARRAY[computerSelection]} slår ${ARRAY[playerSelection]}!!`;
+                }
+            }
+        }
+
+        function game()
+        {   
+            
+            let playerName = prompt("Indtast dit navn?");  
+            while (true)
+            {
+                console.log(
+                          playRound(
+                              computerSelection(), 
+                              playerSelection(prompt("sten, saks eller papir").toLocaleLowerCase()), 
+                              playerName ));
+
+                console.log(`Score: ${playerName}: ${playerScore} - Computer: ${computerScore}`)
+
+                if (playerScore === 3){
+                    console.log(`Game Over - ${playerName} vandt`);
+                    console.log(`Resultat: ${playerName}: ${playerScore} - Computer: ${computerScore}!!`);
+                    break;
+                } else if (computerScore === 3) {
+                    console.log(`Game Over - ${playerName} tabte!!`);
+                    console.log(`Resultat: ${playerName}: ${playerScore} - Computer: ${computerScore}!!`);
+                    break;
+                }
+            }
+            playerScore = 0;
+            computerScore = 0;                  
+
+        }
+        </script>
+
+    </body>
+</html>
